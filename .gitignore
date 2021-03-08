@@ -2,6 +2,7 @@
 
 node_modules/
 /yarn.lock
+/client/yarn.lock
 /package-lock.json
 /*.env
 
