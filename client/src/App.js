@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Sidebar from './components/layout/Sidebar';
+import AppRouter from './components/router/AppRouter';
 
-function App() {
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+}));
+
+const App = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Router>
+        <div className={classes.root}>
+          <Fragment>
+            <Sidebar />
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <AppRouter />
+            </main>
+          </Fragment>
+        </div>
+      </Router>
+    </Fragment>
   );
-}
+};
 
 export default App;
