@@ -75,7 +75,7 @@ const Sidebar = (props) => {
 
   const menuLists = [
     {
-      name: 'Dashboard',
+      name: 'Home',
       icon: () => <HomeIcon />,
       link: '/',
     },
