@@ -1,9 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 node_modules/
-/yarn.lock
-/client/yarn.lock
-/package-lock.json
 /*.env
 
 # /config/default.json
@@ -18,8 +15,6 @@ node_modules/
 /client/.env.test.local
 /client/.env.production.local
 
-/client/package-lock.json
-/clinet/yarn.lock
 /client/node_modules/
 
 npm-debug.log*

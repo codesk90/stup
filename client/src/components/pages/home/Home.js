@@ -1,31 +1,24 @@
-import React from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import { Grid } from '@material-ui/core';
+import React, { Fragment } from 'react';
+import Calendar from './Calendar';
+import { Grid, Paper, Box } from '@material-ui/core';
 
-const Dashboard = () => {
+const Home = () => {
   return (
-    <Grid container>
-      <Grid item xs={12} sm={9} spacing={2}>
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay',
-          }}
-          initialView='dayGridMonth'
-          weekends={false}
-          events={[
-            { title: 'event 1', date: '2020-03-10' },
-            { title: 'event 2', date: '2020-03-11' },
-          ]}
-        />
+    <Fragment>
+      <Grid item xs={12} md={9}>
+        <Paper>
+          <Box p={2}>
+            <Calendar />
+          </Box>
+        </Paper>
       </Grid>
-    </Grid>
+      <Grid item xs={12} md={3}>
+        <Paper>
+          <Box p={2}>Hello</Box>
+        </Paper>
+      </Grid>
+    </Fragment>
   );
 };
 
-export default Dashboard;
+export default Home;

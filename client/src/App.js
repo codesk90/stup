@@ -1,40 +1,41 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { CssBaseline, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Sidebar from './components/layout/Sidebar';
+import { Header } from './components/layout/Header';
+import { Navbar } from './components/layout/Navbar';
 import AppRouter from './components/router/AppRouter';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
+  appBar: {
+    [theme.breakpoints.up('lg')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
 }));
 
 const App = () => {
-  const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
+  const classes = useStyles();
   return (
     <Fragment>
       <Router>
-        <div className={classes.root}>
-          <Fragment>
-            <Sidebar />
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <AppRouter />
-            </main>
-          </Fragment>
-        </div>
+        <CssBaseline />
+        <Grid container className={classes.appBar}>
+          <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+          <Grid item xs={12} className={classes.content}>
+            <AppRouter />
+          </Grid>
+        </Grid>
+        <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       </Router>
     </Fragment>
   );
