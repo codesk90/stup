@@ -1,11 +1,15 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const GetStudents = createAsyncThunk(
   'students/getStudents',
   async () => {
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+    // dummy json data
+    const data = require('./student.json');
 
-    return res.data;
+    // format to call backend data
+    // const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+
+    return data;
   }
 );
