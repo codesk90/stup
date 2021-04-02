@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import {
   Divider,
   Drawer,
@@ -36,12 +36,6 @@ const useStyles = makeStyles((theme) => ({
 export const Navbar = ({ mobileOpen, setMobileOpen }) => {
   const classes = useStyles();
 
-  const [selectedMenu, setSelectedMenu] = useState(0);
-
-  const handleMenuItemClick = (e, i) => {
-    setSelectedMenu(i);
-  };
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -71,14 +65,7 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
       <List>
         {menuLists.map((list, index) => {
           return (
-            <ListItem
-              button
-              component={Link}
-              to={list.link}
-              key={index}
-              onClick={(e) => handleMenuItemClick(e, index)}
-              selected={selectedMenu === index}
-            >
+            <ListItem button component={Link} to={list.link} key={index}>
               <ListItemIcon>{list.icon()}</ListItemIcon>
               <ListItemText primary={list.name} />
             </ListItem>

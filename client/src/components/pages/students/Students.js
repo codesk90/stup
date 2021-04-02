@@ -18,7 +18,7 @@ const Students = () => {
   const { students, loading } = useSelector((state) => state.student);
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       {students.length !== 0 && !loading ? (
         <StudentList />
       ) : (
