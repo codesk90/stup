@@ -11,7 +11,7 @@ const Students = () => {
     // setTimeout for test purpose
     setTimeout(() => {
       dispatch(GetStudents());
-    }, 1000);
+    }, 500);
     // eslint-disable-next-line
   }, []);
 
