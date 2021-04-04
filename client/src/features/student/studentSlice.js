@@ -1,29 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GetStudents } from '../../services';
+import { GetStates, GetStudents } from '../../services';
 
 export const initialState = {
   students: [],
-  loading: true,
+  stateList: [],
+  isLoading: false,
   error: false,
 };
 
 export const studentSlice = createSlice({
   name: 'student',
   initialState,
-  reducers: {},
+  reducers: {
+    handleLoading: (state, action) => {
+      state.isLoading = true;
+    },
+  },
   extraReducers: {
     [GetStudents.fulfilled]: (state, action) => {
       state.students = action.payload;
-      state.loading = false;
+      state.isLoading = false;
     },
     [GetStudents.rejected]: (state, action) => {
       state.students = [];
-      state.loading = false;
+      state.isLoading = false;
+    },
+    [GetStates.fulfilled]: (state, action) => {
+      state.stateList = action.payload;
+      state.isLoading = false;
     },
   },
 });
 
 // eslint-disable-next-line
-export const {} = studentSlice.actions;
+export const { handleLoading } = studentSlice.actions;
 
 export default studentSlice.reducer;

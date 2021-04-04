@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import {
   Divider,
   Drawer,
@@ -13,9 +13,10 @@ import {
   Home as HomeIcon,
   Person as PersonIcon,
   People as PeopleIcon,
+  Book as BookIcon,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -31,10 +32,14 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  active: {
+    background: '#f4f4f4',
+  },
 }));
 
 export const Navbar = ({ mobileOpen, setMobileOpen }) => {
   const classes = useStyles();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -43,18 +48,23 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
   const menuLists = [
     {
       name: 'Home',
-      icon: () => <HomeIcon />,
+      icon: <HomeIcon color="primary" />,
       link: '/',
     },
     {
       name: 'Teachers',
-      icon: () => <PersonIcon />,
+      icon: <PersonIcon color="primary" />,
       link: '/teachers',
     },
     {
       name: 'Students',
-      icon: () => <PeopleIcon />,
+      icon: <PeopleIcon color="primary" />,
       link: '/students',
+    },
+    {
+      name: 'Curriculum',
+      icon: <BookIcon color="primary" />,
+      link: '/curriculums',
     },
   ];
 
@@ -65,8 +75,16 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
       <List>
         {menuLists.map((list, index) => {
           return (
-            <ListItem button component={Link} to={list.link} key={index}>
-              <ListItemIcon>{list.icon()}</ListItemIcon>
+            <ListItem
+              button
+              component={Link}
+              to={list.link}
+              key={index}
+              className={
+                location.pathname === list.link ? classes.active : null
+              }
+            >
+              <ListItemIcon>{list.icon}</ListItemIcon>
               <ListItemText primary={list.name} />
             </ListItem>
           );
@@ -79,9 +97,10 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
   return (
     <Fragment>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden lgUp implementation='css'>
+      <Hidden lgUp implementation="css">
         <Drawer
-          variant='temporary'
+          variant="temporary"
+          anchor="left"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
@@ -95,12 +114,12 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
           {drawer}
         </Drawer>
       </Hidden>
-      <Hidden mdDown implementation='css'>
+      <Hidden mdDown implementation="css">
         <Drawer
           classes={{
             paper: classes.drawerPaper,
           }}
-          variant='permanent'
+          variant="permanent"
           open
         >
           {drawer}

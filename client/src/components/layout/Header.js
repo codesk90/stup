@@ -26,18 +26,23 @@ export const Header = ({ mobileOpen, setMobileOpen }) => {
   const classes = useStyles();
 
   return (
-    <AppBar position='relative' className={classes.appBar} color={'default'}>
+    <AppBar
+      position="relative"
+      className={classes.appBar}
+      color={'default'}
+      elevation={1}
+    >
       <Toolbar>
         <IconButton
-          color='inherit'
-          aria-label='open drawer'
-          edge='start'
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
           onClick={handleDrawerToggle}
           className={classes.menuButton}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant='h6' noWrap>
+        <Typography variant="h6" noWrap>
           Mangement System
         </Typography>
       </Toolbar>

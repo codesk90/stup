@@ -38,14 +38,21 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'School Name',
-    width: '25%',
+    width: '20%',
   },
   {
     id: 'grade',
     numeric: true,
     disablePadding: false,
     label: 'Grade',
-    width: '5%',
+    width: '10%',
+  },
+  {
+    id: 'level',
+    numeric: true,
+    disablePadding: false,
+    label: 'Level',
+    width: '10%',
   },
   {
     id: 'phone_number1',
@@ -53,13 +60,6 @@ const headCells = [
     disablePadding: false,
     label: 'Phone Number',
     width: '15%',
-  },
-  {
-    id: 'edit',
-    numeric: true,
-    disablePadding: false,
-    label: 'Edit',
-    width: '10%',
   },
 ];
 
@@ -74,7 +74,7 @@ const StudentList = () => {
   const classes = useStyles();
   const pathName = useLocation().pathname;
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
   const currentWindowHeight = window.innerHeight - 254;
   const [paperHeight, setPaperHeight] = useState(currentWindowHeight);
 
@@ -106,22 +106,20 @@ const StudentList = () => {
       <Grid item xs={12}>
         <Paper>
           <Box p={2}>
-            <Grid container alignItems='center' justify='space-between'>
-              <Grid item xs={7}>
-                <Typography variant='h4' id='tableTitle' component='div'>
+            <Grid container>
+              <Box flexGrow={1}>
+                <Typography variant="h4" id="tableTitle" component="div">
                   Students
                 </Typography>
-              </Grid>
-              <Grid item xs={5} style={{ textAlign: 'right' }}>
-                <Button
-                  variant='outlined'
-                  color='primary'
-                  component={Link}
-                  to={pathName + '/new'}
-                >
-                  New Student
-                </Button>
-              </Grid>
+              </Box>
+              <Button
+                variant="outlined"
+                color="primary"
+                component={Link}
+                to={pathName + '/new'}
+              >
+                New Student
+              </Button>
             </Grid>
           </Box>
         </Paper>
@@ -132,8 +130,8 @@ const StudentList = () => {
             <Table
               stickyHeader
               className={classes.table}
-              aria-labelledby='Students'
-              aria-label='student table'
+              aria-labelledby="Students"
+              aria-label="student table"
             >
               <TableHead style={{ backgroundColor: 'blue' }}>
                 <TableRow>
@@ -166,7 +164,7 @@ const StudentList = () => {
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
-            component='div'
+            component="div"
             count={students.length}
             rowsPerPage={rowsPerPage}
             page={page}

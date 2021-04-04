@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Edit as EditIcon } from '@material-ui/icons';
-import { TableRow, TableCell, IconButton } from '@material-ui/core';
+import { TableRow, TableCell, makeStyles } from '@material-ui/core';
 
 const schoolName = (school, grade) => {
   if (grade > 8) return `${school} High School`;
@@ -9,9 +8,22 @@ const schoolName = (school, grade) => {
   return `${school} Elementary School`;
 };
 
+const useStyles = makeStyles((theme) => ({
+  hover: {
+    cursor: 'pointer',
+  },
+}));
+
 const StudentListItem = ({ student }) => {
+  const classes = useStyles();
   return (
-    <TableRow hover key={student.id} tabIndex={-1}>
+    <TableRow
+      hover
+      key={student.id}
+      tabIndex={-1}
+      className={classes.hover}
+      onClick={() => console.log('selected row')}
+    >
       <TableCell component="th" scope="row">
         {`${student.first_name} ${student.last_name}`}
       </TableCell>
@@ -20,12 +32,8 @@ const StudentListItem = ({ student }) => {
         {schoolName(student.school, student.grade)}
       </TableCell>
       <TableCell align="right">{student.grade}</TableCell>
+      <TableCell align="right">{student.level}</TableCell>
       <TableCell align="right">{student.phone_number1}</TableCell>
-      <TableCell align="right">
-        <IconButton onClick={() => console.log('Edit')}>
-          <EditIcon fontSize="small" />
-        </IconButton>
-      </TableCell>
     </TableRow>
   );
 };

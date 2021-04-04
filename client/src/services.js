@@ -13,3 +13,9 @@ export const GetStudents = createAsyncThunk(
     return data;
   }
 );
+
+export const GetStates = createAsyncThunk('students/getStates', async () => {
+  const data = require('./state.json');
+
+  return data;
+});
