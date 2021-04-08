@@ -13,10 +13,15 @@ import {
   TableRow,
   Typography,
   Button,
+  CircularProgress,
 } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import StudentListItem from './StudentListItem';
+import { useSelector, useDispatch } from 'react-redux';
+import StudentItem from './StudentItem';
+import {
+  clearCurrentStudent,
+  fetchStudentList,
+} from '../../../features/student/studentSlice';
 
 const headCells = [
   {
@@ -70,13 +75,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StudentList = () => {
-  const { students } = useSelector((state) => state.student);
+  const { studentList, isLoading, filtered } = useSelector(
+    (state) => state.student
+  );
   const classes = useStyles();
+  const dispatch = useDispatch();
   const pathName = useLocation().pathname;
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
   const currentWindowHeight = window.innerHeight - 254;
   const [paperHeight, setPaperHeight] = useState(currentWindowHeight);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -92,6 +100,11 @@ const StudentList = () => {
   };
 
   useEffect(() => {
+    dispatch(clearCurrentStudent());
+    dispatch(fetchStudentList());
+  }, [dispatch]);
+
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -99,10 +112,12 @@ const StudentList = () => {
   }, [paperHeight]);
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, students.length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(rowsPerPage, studentList.length - page * rowsPerPage);
 
+  console.log();
   return (
-    <Fragment>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Paper>
           <Box p={2}>
@@ -126,54 +141,67 @@ const StudentList = () => {
       </Grid>
       <Grid item xs={12}>
         <Paper>
-          <TableContainer style={{ height: paperHeight }}>
-            <Table
-              stickyHeader
-              className={classes.table}
-              aria-labelledby="Students"
-              aria-label="student table"
-            >
-              <TableHead style={{ backgroundColor: 'blue' }}>
-                <TableRow>
-                  {headCells.map((headCell) => (
-                    <TableCell
-                      key={headCell.id}
-                      align={headCell.numeric ? 'right' : 'left'}
-                      style={{ width: headCell.width }}
-                    >
-                      {headCell.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {students
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((student) => {
-                    return (
-                      <StudentListItem student={student} key={student.id} />
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 77 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={students.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          {studentList.lenth !== 0 && isLoading === 'idle' ? (
+            <Fragment>
+              <TableContainer style={{ height: paperHeight }}>
+                <Table
+                  stickyHeader
+                  className={classes.table}
+                  aria-labelledby="Students"
+                  aria-label="student table"
+                >
+                  <TableHead style={{ backgroundColor: 'blue' }}>
+                    <TableRow>
+                      {headCells.map((headCell) => (
+                        <TableCell
+                          key={headCell.id}
+                          align={headCell.numeric ? 'right' : 'left'}
+                          style={{ width: headCell.width }}
+                        >
+                          {headCell.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filtered !== null
+                      ? filtered.map((student) => (
+                          <StudentItem student={student} key={student.id} />
+                        ))
+                      : studentList
+                          .slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                          .map((student) => {
+                            return (
+                              <StudentItem student={student} key={student.id} />
+                            );
+                          })}
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 77 * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={studentList.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            </Fragment>
+          ) : (
+            <CircularProgress />
+          )}
         </Paper>
       </Grid>
-    </Fragment>
+    </Grid>
   );
 };
 

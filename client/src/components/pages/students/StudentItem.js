@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TableRow, TableCell, makeStyles } from '@material-ui/core';
+import { withRouter } from 'react-router';
 
 const schoolName = (school, grade) => {
   if (grade > 8) return `${school} High School`;
@@ -14,7 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StudentListItem = ({ student }) => {
+const StudentItem = ({ student, match, history }) => {
+  const handleSelectedStudent = () => {
+    history.push({
+      pathname: `${match.url}/${student.id}`,
+      state: { data: student },
+    });
+  };
+
   const classes = useStyles();
   return (
     <TableRow
@@ -22,7 +30,7 @@ const StudentListItem = ({ student }) => {
       key={student.id}
       tabIndex={-1}
       className={classes.hover}
-      onClick={() => console.log('selected row')}
+      onClick={handleSelectedStudent}
     >
       <TableCell component="th" scope="row">
         {`${student.first_name} ${student.last_name}`}
@@ -38,9 +46,9 @@ const StudentListItem = ({ student }) => {
   );
 };
 
-StudentListItem.propTypes = {
+StudentItem.propTypes = {
   student: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default StudentListItem;
+export default withRouter(StudentItem);

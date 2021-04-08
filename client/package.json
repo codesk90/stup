@@ -27,7 +27,9 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
+    "dev": "concurrently \"npm start\" \"npm run json-server\"",
     "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
+    "json-server": "json-server --watch db.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,5 +51,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0",
+    "json-server": "^0.16.3"
   }
 }
