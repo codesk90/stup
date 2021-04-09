@@ -29,9 +29,13 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
+  logo: {
+    margin: '0 auto',
+  },
   drawerPaper: {
     width: drawerWidth,
   },
+  listitem: { padding: theme.spacing(2) },
   active: {
     background: '#f4f4f4',
   },
@@ -62,7 +66,7 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
       link: '/students',
     },
     {
-      name: 'Curriculum',
+      name: 'Curriculums',
       icon: <BookIcon color="primary" />,
       link: '/curriculums',
     },
@@ -70,7 +74,16 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div
+        className={classes.toolbar}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <h1 style={{ margin: '0' }}>LOGO</h1>
+      </div>
       <Divider />
       <List>
         {menuLists.map((list, index) => {

@@ -29,7 +29,7 @@ export const Header = ({ mobileOpen, setMobileOpen }) => {
     <AppBar
       position="relative"
       className={classes.appBar}
-      color={'default'}
+      color="primary"
       elevation={1}
     >
       <Toolbar>
@@ -43,7 +43,7 @@ export const Header = ({ mobileOpen, setMobileOpen }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>
-          Mangement System
+          Admin System
         </Typography>
       </Toolbar>
       <Divider />

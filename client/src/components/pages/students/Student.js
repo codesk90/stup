@@ -8,18 +8,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import StudentForm from './StudentForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStudentById } from '../../../features/student/studentSlice';
 
 const currentWindowHeight = window.innerHeight - 202;
 
-const Student = ({
-  location: {
-    state: { data },
-  },
-}) => {
-  // const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.student);
-  const [currentStudent, setCurrentStudent] = useState(null);
+const Student = ({ match }) => {
+  const dispatch = useDispatch();
+  const { isLoading, currentStudent } = useSelector((state) => state.student);
   const [paperHeight, setPaperHeight] = useState(currentWindowHeight);
   const [saveOn, setSaveOn] = useState(true);
   const handleResize = () => {
@@ -27,12 +23,11 @@ const Student = ({
   };
 
   useEffect(() => {
-    setCurrentStudent(data);
-    // dispatch(fetchStudentById(match.params.id));
+    dispatch(fetchStudentById(match.params.id));
     // Get States for Autocomplete
     // eslint-disable-next-line
     // dispatch(GetStateList());
-  }, [data]);
+  }, [dispatch, match]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);

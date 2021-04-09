@@ -1,27 +1,6 @@
 {
   "students": [
     {
-      "id": 2,
-      "first_name": "Peggie",
-      "last_name": "Adan",
-      "parent_name": "Peggie MacLennan",
-      "email1": "pmaclennan1@army.mil",
-      "email2": "pmaclennan1@chron.com",
-      "gender": "Bigender",
-      "level": "2",
-      "grade": 10,
-      "school": "MacLennan",
-      "address": {
-        "street1": "2909 Upham Court",
-        "street2": "617 Grayhawk Court",
-        "city": "Daytona Beach",
-        "state": "FL",
-        "zipcode": 21465
-      },
-      "phone_number1": "407-742-2350",
-      "phone_number2": "760-858-4136"
-    },
-    {
       "id": 3,
       "first_name": "Cale",
       "last_name": "Egentan",
@@ -30,7 +9,7 @@
       "email2": "ccarlsen2@1688.com",
       "gender": "Male",
       "level": 5,
-      "grade": 10,
+      "grade": "10",
       "school": "Carlsen",
       "address": {
         "street1": "79192 Riverside Hill",
@@ -325,7 +304,7 @@
       "gender": "Female",
       "level": 3,
       "grade": 12,
-      "school": "Torricina",
+      "school": "Carsey",
       "address": {
         "street1": "2 Butterfield Park",
         "street2": "3 Scott Alley",

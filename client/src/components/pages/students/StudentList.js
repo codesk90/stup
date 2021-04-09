@@ -17,7 +17,11 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import StudentItem from './StudentItem';
-import { fetchStudentList } from '../../../features/student/studentSlice';
+import {
+  clearFilter,
+  fetchStudentList,
+} from '../../../features/student/studentSlice';
+import StudentFilter from './StudentFilter';
 
 const headCells = [
   {
@@ -32,32 +36,32 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Email',
-    width: '25%',
+    width: '27.5%',
   },
   {
     id: 'school',
     numeric: false,
     disablePadding: false,
     label: 'School Name',
-    width: '20%',
+    width: '22.5%',
   },
   {
     id: 'grade',
     numeric: true,
     disablePadding: false,
     label: 'Grade',
-    width: '10%',
+    width: '7.5%',
   },
   {
     id: 'level',
     numeric: true,
     disablePadding: false,
     label: 'Level',
-    width: '10%',
+    width: '7.5%',
   },
   {
-    id: 'phone_number1',
-    numeric: true,
+    id: 'phone_number',
+    numeric: false,
     disablePadding: false,
     label: 'Phone Number',
     width: '15%',
@@ -99,6 +103,7 @@ const StudentList = () => {
     if (studentList.length === 0) {
       dispatch(fetchStudentList());
     }
+    dispatch(clearFilter());
   }, [dispatch, studentList]);
 
   useEffect(() => {
@@ -117,12 +122,13 @@ const StudentList = () => {
       <Grid item xs={12}>
         <Paper>
           <Box p={2}>
-            <Grid container>
-              <Box flexGrow={1}>
+            <Grid container alignItems="center">
+              <Box>
                 <Typography variant="h4" id="tableTitle" component="div">
                   Students
                 </Typography>
               </Box>
+              <StudentFilter />
               <Button
                 variant="outlined"
                 color="primary"
@@ -150,7 +156,13 @@ const StudentList = () => {
                     {headCells.map((headCell) => (
                       <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align={
+                          headCell.numeric
+                            ? 'center'
+                            : headCell.id !== 'phone_number'
+                            ? 'left'
+                            : 'right'
+                        }
                         style={{ width: headCell.width }}
                       >
                         {headCell.label}
@@ -160,9 +172,14 @@ const StudentList = () => {
                 </TableHead>
                 <TableBody>
                   {filtered !== null
-                    ? filtered.map((student) => (
-                        <StudentItem student={student} key={student.id} />
-                      ))
+                    ? filtered
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((student) => (
+                          <StudentItem student={student} key={student.id} />
+                        ))
                     : studentList
                         .slice(
                           page * rowsPerPage,
@@ -184,7 +201,7 @@ const StudentList = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={studentList.length}
+              count={filtered ? filtered.length : studentList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}

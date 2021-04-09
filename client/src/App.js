@@ -1,7 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CssBaseline, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from '@material-ui/core/styles';
 import { Header } from './components/layout/Header';
 import { Navbar } from './components/layout/Navbar';
 import AppRouter from './components/router/AppRouter';
@@ -21,12 +25,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const THEME = createMuiTheme({
+  typography: {
+    fontFamily: `'Work Sans', sans-serif`,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+  },
+});
+
 const App = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const classes = useStyles();
   return (
-    <Fragment>
+    <MuiThemeProvider theme={THEME}>
       <Router>
         <CssBaseline />
         <Grid container className={classes.appBar}>
@@ -37,7 +50,7 @@ const App = () => {
         </Grid>
         <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       </Router>
-    </Fragment>
+    </MuiThemeProvider>
   );
 };
 

@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-import Curriculums from '../pages/curriculums/Curriculums';
+import CurriculumList from '../pages/curriculums/CurriculumList';
 import Home from '../pages/home/Home';
 import Student from '../pages/students/Student';
 import NewStudent from '../pages/students/NewStudent';
@@ -14,7 +14,7 @@ const AppRouter = () => {
       <Route exact path="/students" component={StudentList} />
       <Route exact path="/students/new" component={NewStudent} />
       <Route path="/students/:id" component={Student} />
-      <Route excat path="/curriculums" component={Curriculums} />
+      <Route excat path="/curriculums" component={CurriculumList} />
     </Switch>
   );
 };

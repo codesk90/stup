@@ -88,8 +88,8 @@ export const getStateList = createAsyncThunk(
 );
 
 export const initialState = {
-  currentStudent: null,
   studentList: [],
+  currentStudent: null,
   stateList: [],
   isLoading: 'idle',
   currentRequestId: '',
@@ -101,11 +101,18 @@ export const studentSlice = createSlice({
   name: 'student',
   initialState,
   reducers: {
-    filterStudentList: (state, action) => {
-      console.log('filter Students');
+    filterStudentList: (state, { payload }) => {
+      state.filtered = state.studentList.filter((student) => {
+        const regex = new RegExp(`${payload}`, 'gi');
+        return (
+          student.first_name.match(regex) ||
+          student.last_name.match(regex) ||
+          student.school.match(regex)
+        );
+      });
     },
-    setCurrentStudent: (state, action) => {
-      state.currentStudent = action.payload;
+    clearFilter: (state, { payload }) => {
+      state.filtered = null;
     },
   },
   extraReducers: {
@@ -117,7 +124,6 @@ export const studentSlice = createSlice({
       }
     },
     [fetchStudentList.pending]: (state, { meta }) => {
-      state.currentStudent = null;
       state.currentRequestId = meta;
       state.isLoading = 'pending';
     },
@@ -156,7 +162,6 @@ export const studentSlice = createSlice({
           }
           return student;
         });
-        state.currentStudent = payload;
         state.isLoading = 'idle';
         state.currentRequestId = '';
       }
@@ -174,6 +179,7 @@ export const studentSlice = createSlice({
     },
     [deleteStudent.fulfilled]: (state, { meta, payload }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
+        state.filtered = null;
         state.studentList = state.studentList.filter(
           ({ id }) => id !== payload
         );
@@ -224,6 +230,6 @@ export const studentSlice = createSlice({
   },
 });
 
-export const { filterStudentList, setCurrentStudent } = studentSlice.actions;
+export const { filterStudentList, clearFilter } = studentSlice.actions;
 
 export default studentSlice.reducer;

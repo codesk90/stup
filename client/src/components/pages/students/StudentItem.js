@@ -39,8 +39,8 @@ const StudentItem = ({ student, match, history }) => {
       <TableCell align="left">
         {schoolName(student.school, student.grade)}
       </TableCell>
-      <TableCell align="right">{student.grade}</TableCell>
-      <TableCell align="right">{student.level}</TableCell>
+      <TableCell align="center">{student.grade}</TableCell>
+      <TableCell align="center">{student.level}</TableCell>
       <TableCell align="right">{student.phone_number1}</TableCell>
     </TableRow>
   );

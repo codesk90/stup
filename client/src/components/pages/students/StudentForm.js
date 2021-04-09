@@ -121,7 +121,7 @@ const StudentForm = ({ student, edit = false, setSaveOn = null }) => {
                     fullWidth
                     label={item.label}
                     variant="outlined"
-                    required={item.require}
+                    // required={item.require}
                     inputProps={{
                       maxLength: item.maxLength,
                     }}
@@ -201,6 +201,7 @@ const StudentForm = ({ student, edit = false, setSaveOn = null }) => {
 
 StudentForm.propTypes = {
   student: PropTypes.object,
+  edit: PropTypes.bool,
   setSaveOn: PropTypes.func,
 };
 
