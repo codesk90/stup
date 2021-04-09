@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
@@ -13,15 +13,11 @@ import {
   TableRow,
   Typography,
   Button,
-  CircularProgress,
 } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import StudentItem from './StudentItem';
-import {
-  clearCurrentStudent,
-  fetchStudentList,
-} from '../../../features/student/studentSlice';
+import { fetchStudentList } from '../../../features/student/studentSlice';
 
 const headCells = [
   {
@@ -100,7 +96,6 @@ const StudentList = () => {
   };
 
   useEffect(() => {
-    dispatch(clearCurrentStudent());
     dispatch(fetchStudentList());
   }, [dispatch]);
 
@@ -139,68 +134,64 @@ const StudentList = () => {
           </Box>
         </Paper>
       </Grid>
-      <Grid item xs={12}>
-        <Paper>
-          {studentList.lenth !== 0 && isLoading === 'idle' ? (
-            <Fragment>
-              <TableContainer style={{ height: paperHeight }}>
-                <Table
-                  stickyHeader
-                  className={classes.table}
-                  aria-labelledby="Students"
-                  aria-label="student table"
-                >
-                  <TableHead style={{ backgroundColor: 'blue' }}>
-                    <TableRow>
-                      {headCells.map((headCell) => (
-                        <TableCell
-                          key={headCell.id}
-                          align={headCell.numeric ? 'right' : 'left'}
-                          style={{ width: headCell.width }}
-                        >
-                          {headCell.label}
-                        </TableCell>
-                      ))}
+      {studentList.lenth !== 0 && isLoading === 'idle' && (
+        <Grid item xs={12}>
+          <Paper>
+            <TableContainer style={{ height: paperHeight }}>
+              <Table
+                stickyHeader
+                className={classes.table}
+                aria-labelledby="Students"
+                aria-label="student table"
+              >
+                <TableHead style={{ backgroundColor: 'blue' }}>
+                  <TableRow>
+                    {headCells.map((headCell) => (
+                      <TableCell
+                        key={headCell.id}
+                        align={headCell.numeric ? 'right' : 'left'}
+                        style={{ width: headCell.width }}
+                      >
+                        {headCell.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filtered !== null
+                    ? filtered.map((student) => (
+                        <StudentItem student={student} key={student.id} />
+                      ))
+                    : studentList
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((student) => {
+                          return (
+                            <StudentItem student={student} key={student.id} />
+                          );
+                        })}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 77 * emptyRows }}>
+                      <TableCell colSpan={6} />
                     </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {filtered !== null
-                      ? filtered.map((student) => (
-                          <StudentItem student={student} key={student.id} />
-                        ))
-                      : studentList
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
-                          .map((student) => {
-                            return (
-                              <StudentItem student={student} key={student.id} />
-                            );
-                          })}
-                    {emptyRows > 0 && (
-                      <TableRow style={{ height: 77 * emptyRows }}>
-                        <TableCell colSpan={6} />
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={studentList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              />
-            </Fragment>
-          ) : (
-            <CircularProgress />
-          )}
-        </Paper>
-      </Grid>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={studentList.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 };

@@ -11,7 +11,7 @@ import StudentForm from './StudentForm';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   // GetStateList,
-  fetchCurrentStudentById,
+  fetchStudentById,
 } from '../../../features/student/studentSlice';
 
 const currentWindowHeight = window.innerHeight - 202;
@@ -20,13 +20,13 @@ const Student = ({ history, match }) => {
   const dispatch = useDispatch();
   const { isLoading, currentStudent } = useSelector((state) => state.student);
   const [paperHeight, setPaperHeight] = useState(currentWindowHeight);
-  const [saveOn, setSaveOn] = useState(false);
+  const [saveOn, setSaveOn] = useState(true);
   const handleResize = () => {
     setPaperHeight(window.innerHeight - 202);
   };
 
   useEffect(() => {
-    dispatch(fetchCurrentStudentById(match.params.id));
+    dispatch(fetchStudentById(match.params.id));
     // Get States for Autocomplete
     // dispatch(GetStateList());
     // eslint-disable-next-line

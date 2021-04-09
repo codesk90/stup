@@ -18,8 +18,8 @@ export const fetchStudentList = createAsyncThunk(
   }
 );
 
-export const fetchCurrentStudentById = createAsyncThunk(
-  'students/fetchCurrentStudentById',
+export const fetchStudentById = createAsyncThunk(
+  'students/fetchStudentById',
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`${url}/students/${id}`);
@@ -27,6 +27,23 @@ export const fetchCurrentStudentById = createAsyncThunk(
       return data;
     } catch (err) {
       return rejectWithValue([], err);
+    }
+  }
+);
+
+export const updateStudentById = createAsyncThunk(
+  'students/updateStudentById',
+  async (studentInfo, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(
+        `${url}/students/${studentInfo.id}`,
+        studentInfo
+      );
+
+      return data;
+    } catch (err) {
+      console.log(rejectWithValue(err.response.data));
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -74,9 +91,6 @@ export const studentSlice = createSlice({
     filterStudentList: (state, action) => {
       console.log('filter Students');
     },
-    clearCurrentStudent: (state, action) => {
-      state.currentStudent = null;
-    },
   },
   extraReducers: {
     [fetchStudentList.fulfilled]: (state, { meta, payload }) => {
@@ -87,6 +101,7 @@ export const studentSlice = createSlice({
       }
     },
     [fetchStudentList.pending]: (state, { meta }) => {
+      state.currentStudent = null;
       state.currentRequestId = meta;
       state.isLoading = 'pending';
     },
@@ -98,22 +113,40 @@ export const studentSlice = createSlice({
         state.error = error;
       }
     },
-    [fetchCurrentStudentById.fulfilled]: (state, { meta, payload }) => {
+    [fetchStudentById.fulfilled]: (state, { meta, payload }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentStudent = payload;
         state.isLoading = 'idle';
         state.currentRequestId = '';
       }
     },
-    [fetchCurrentStudentById.pending]: (state, { meta }) => {
+    [fetchStudentById.pending]: (state, { meta }) => {
       state.currentRequestId = meta;
       state.isLoading = 'pending';
     },
-    [fetchCurrentStudentById.rejected]: (state, { meta, payload, error }) => {
+    [fetchStudentById.rejected]: (state, { meta, payload, error }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta;
         state.isLoading = 'idle';
         state.currentStudent = payload;
+        state.error = error;
+      }
+    },
+    [updateStudentById.fulfilled]: (state, { meta, payload }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentStudent = payload;
+        state.isLoading = 'idle';
+        state.currentRequestId = '';
+      }
+    },
+    [updateStudentById.pending]: (state, { meta }) => {
+      state.currentRequestId = meta;
+      state.isLoading = 'pending';
+    },
+    [updateStudentById.rejected]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentRequestId = meta;
+        state.isLoading = 'idle';
         state.error = error;
       }
     },
