@@ -46,7 +46,7 @@ export const Navbar = ({ mobileOpen, setMobileOpen }) => {
   const location = useLocation();
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((open) => !open);
   };
 
   const menuLists = [

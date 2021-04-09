@@ -59,7 +59,7 @@ const Student = ({ match }) => {
         </Paper>
       </Grid>
       <Grid item xs={12} md={9}>
-        <Paper style={{ height: paperHeight }}>
+        <Paper style={{ height: paperHeight, overflow: 'auto' }}>
           {currentStudent && isLoading === 'idle' ? (
             <StudentForm
               student={currentStudent}
@@ -72,7 +72,9 @@ const Student = ({ match }) => {
         </Paper>
       </Grid>
       <Grid item xs={12} md={3}>
-        <Paper style={{ height: paperHeight }}>Assign Curriculum</Paper>
+        <Paper style={{ height: paperHeight, overflowX: 'auto' }}>
+          Assign Curriculum
+        </Paper>
       </Grid>
     </Grid>
   );

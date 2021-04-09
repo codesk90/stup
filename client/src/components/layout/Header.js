@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = ({ mobileOpen, setMobileOpen }) => {
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((open) => !open);
   };
 
   const classes = useStyles();
