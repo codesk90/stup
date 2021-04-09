@@ -1,27 +1,6 @@
 {
   "students": [
     {
-      "id": 1,
-      "first_name": "Tudor",
-      "last_name": "Frondt",
-      "parent_name": "Tudor Brimner",
-      "email1": "tbrimner0@xrea.com",
-      "email2": "tbrimner0@creativecommons.org",
-      "gender": "Genderqueer",
-      "level": 1,
-      "grade": "11",
-      "school": "Brimner",
-      "address": {
-        "street1": "49113 Hagan Avenue",
-        "street2": "87897 Ilene Drive",
-        "city": "Worcester",
-        "state": "MA",
-        "zipcode": 94815
-      },
-      "phone_number1": "774-653-3948",
-      "phone_number2": "602-293-0210"
-    },
-    {
       "id": 2,
       "first_name": "Peggie",
       "last_name": "Adan",
@@ -29,7 +8,7 @@
       "email1": "pmaclennan1@army.mil",
       "email2": "pmaclennan1@chron.com",
       "gender": "Bigender",
-      "level": 2,
+      "level": "2",
       "grade": 10,
       "school": "MacLennan",
       "address": {
@@ -2078,106 +2057,6 @@
       },
       "phone_number1": "610-321-1539",
       "phone_number2": "770-297-7453"
-    },
-    {
-      "first_name": "test",
-      "last_name": "test",
-      "parent_name": "tes",
-      "email1": "tests",
-      "email2": "testt",
-      "grade": "1",
-      "level": "2",
-      "school": "tdstset",
-      "address": {
-        "street1": "tsetse",
-        "street2": "setsetse",
-        "city": "stst",
-        "state": "sets",
-        "zipcode": "tstest"
-      },
-      "phone_number1": "132-456-7890",
-      "phone_number2": "",
-      "id": 100
-    },
-    {
-      "first_name": "test",
-      "last_name": "etst",
-      "parent_name": "test",
-      "email1": "test",
-      "email2": "",
-      "grade": "12",
-      "level": "",
-      "school": "set",
-      "address": {
-        "street1": "set",
-        "street2": "set",
-        "city": "set",
-        "state": "set",
-        "zipcode": "21312"
-      },
-      "phone_number1": "123-456-7891",
-      "phone_number2": "",
-      "id": 101
-    },
-    {
-      "first_name": "test",
-      "last_name": "test",
-      "parent_name": "dtes",
-      "email1": "test",
-      "email2": "tse",
-      "grade": "2",
-      "level": "",
-      "school": "tsets",
-      "address": {
-        "street1": "tset",
-        "street2": "teeset",
-        "city": "steste",
-        "state": "tsetst",
-        "zipcode": "468523"
-      },
-      "phone_number1": "789-987-4561",
-      "phone_number2": "",
-      "id": 102
-    },
-    {
-      "first_name": "test",
-      "last_name": "test",
-      "parent_name": "Andy",
-      "email1": "test@test.com",
-      "email2": "",
-      "grade": "2",
-      "level": "2",
-      "school": "test",
-      "address": {
-        "street1": "test",
-        "street2": "",
-        "city": "test",
-        "state": "test",
-        "zipcode": "23234"
-      },
-      "phone_number1": "789-456-7891",
-      "phone_number2": "",
-      "id": 103
-    },
-    {
-      "first_name": "test2",
-      "last_name": "test2",
-      "parent_name": "Andy",
-      "email1": "test@test.com",
-      "email2": "",
-      "grade": "2",
-      "level": "2",
-      "school": "test",
-      "address": {
-        "street1": "test",
-        "street2": "",
-        "city": "test",
-        "state": "test",
-        "zipcode": "23234"
-      },
-      "phone_number1": "789-456-7891",
-      "phone_number2": "",
-      "id": 104
     }
   ],
   "states": [

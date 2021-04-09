@@ -15,7 +15,8 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import {
   addStudent,
-  updateStudentById,
+  deleteStudent,
+  updateStudent,
 } from '../../../features/student/studentSlice';
 import { formDataList } from './formDataList';
 import { useHistory } from 'react-router';
@@ -37,7 +38,8 @@ const StudentForm = ({ student, edit = false, setSaveOn = null }) => {
 
   const handleDelete = () => {
     setOpenDialog(false);
-    // dispatch()
+    dispatch(deleteStudent(studentInfo.id));
+    history.push('/students');
   };
 
   const handleForm = (input) => (e) => {
@@ -66,7 +68,7 @@ const StudentForm = ({ student, edit = false, setSaveOn = null }) => {
     try {
       const resultAction = !edit
         ? dispatch(addStudent(studentInfo))
-        : dispatch(updateStudentById(studentInfo));
+        : dispatch(updateStudent(studentInfo));
       unwrapResult(resultAction);
       history.push('/students');
     } catch (error) {

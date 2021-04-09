@@ -96,8 +96,10 @@ const StudentList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchStudentList());
-  }, [dispatch]);
+    if (studentList.length === 0) {
+      dispatch(fetchStudentList());
+    }
+  }, [dispatch, studentList]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -110,7 +112,6 @@ const StudentList = () => {
     rowsPerPage -
     Math.min(rowsPerPage, studentList.length - page * rowsPerPage);
 
-  console.log();
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>

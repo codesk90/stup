@@ -31,8 +31,8 @@ export const fetchStudentById = createAsyncThunk(
   }
 );
 
-export const updateStudentById = createAsyncThunk(
-  'students/updateStudentById',
+export const updateStudent = createAsyncThunk(
+  'students/updateStudent',
   async (studentInfo, { rejectWithValue }) => {
     try {
       const { data } = await axios.put(
@@ -44,6 +44,19 @@ export const updateStudentById = createAsyncThunk(
     } catch (err) {
       console.log(rejectWithValue(err.response.data));
       return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const deleteStudent = createAsyncThunk(
+  'students/deletStudent',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { status } = await axios.delete(`${url}/students/${id}`);
+
+      if (status === 200) return id;
+    } catch (err) {
+      return rejectWithValue([], err);
     }
   }
 );
@@ -91,6 +104,9 @@ export const studentSlice = createSlice({
     filterStudentList: (state, action) => {
       console.log('filter Students');
     },
+    setCurrentStudent: (state, action) => {
+      state.currentStudent = action.payload;
+    },
   },
   extraReducers: {
     [fetchStudentList.fulfilled]: (state, { meta, payload }) => {
@@ -132,18 +148,44 @@ export const studentSlice = createSlice({
         state.error = error;
       }
     },
-    [updateStudentById.fulfilled]: (state, { meta, payload }) => {
+    [updateStudent.fulfilled]: (state, { meta, payload }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
+        state.studentList = state.studentList.map((student) => {
+          if (student.id === payload.id) {
+            return payload;
+          }
+          return student;
+        });
         state.currentStudent = payload;
         state.isLoading = 'idle';
         state.currentRequestId = '';
       }
     },
-    [updateStudentById.pending]: (state, { meta }) => {
+    [updateStudent.pending]: (state, { meta }) => {
       state.currentRequestId = meta;
       state.isLoading = 'pending';
     },
-    [updateStudentById.rejected]: (state, { meta, payload, error }) => {
+    [updateStudent.rejected]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentRequestId = meta;
+        state.isLoading = 'idle';
+        state.error = error;
+      }
+    },
+    [deleteStudent.fulfilled]: (state, { meta, payload }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.studentList = state.studentList.filter(
+          ({ id }) => id !== payload
+        );
+        state.isLoading = 'idle';
+        state.currentRequestId = '';
+      }
+    },
+    [deleteStudent.pending]: (state, { meta }) => {
+      state.currentRequestId = meta;
+      state.isLoading = 'pending';
+    },
+    [deleteStudent.rejected]: (state, { meta, payload, error }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta;
         state.isLoading = 'idle';
@@ -182,6 +224,6 @@ export const studentSlice = createSlice({
   },
 });
 
-export const { filterStudentList, clearCurrentStudent } = studentSlice.actions;
+export const { filterStudentList, setCurrentStudent } = studentSlice.actions;
 
 export default studentSlice.reducer;

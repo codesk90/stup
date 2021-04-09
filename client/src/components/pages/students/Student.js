@@ -8,17 +8,18 @@ import {
   Typography,
 } from '@material-ui/core';
 import StudentForm from './StudentForm';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  // GetStateList,
-  fetchStudentById,
-} from '../../../features/student/studentSlice';
+import { useSelector } from 'react-redux';
 
 const currentWindowHeight = window.innerHeight - 202;
 
-const Student = ({ history, match }) => {
-  const dispatch = useDispatch();
-  const { isLoading, currentStudent } = useSelector((state) => state.student);
+const Student = ({
+  location: {
+    state: { data },
+  },
+}) => {
+  // const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.student);
+  const [currentStudent, setCurrentStudent] = useState(null);
   const [paperHeight, setPaperHeight] = useState(currentWindowHeight);
   const [saveOn, setSaveOn] = useState(true);
   const handleResize = () => {
@@ -26,11 +27,12 @@ const Student = ({ history, match }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchStudentById(match.params.id));
+    setCurrentStudent(data);
+    // dispatch(fetchStudentById(match.params.id));
     // Get States for Autocomplete
-    // dispatch(GetStateList());
     // eslint-disable-next-line
-  }, []);
+    // dispatch(GetStateList());
+  }, [data]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -63,7 +65,7 @@ const Student = ({ history, match }) => {
       </Grid>
       <Grid item xs={12} md={9}>
         <Paper style={{ height: paperHeight }}>
-          {currentStudent !== null && isLoading === 'idle' ? (
+          {currentStudent && isLoading === 'idle' ? (
             <StudentForm
               student={currentStudent}
               edit={true}
