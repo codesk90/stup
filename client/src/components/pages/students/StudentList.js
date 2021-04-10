@@ -191,7 +191,7 @@ const StudentList = () => {
                           );
                         })}
                   {emptyRows > 0 && (
-                    <TableRow style={{ height: 77 * emptyRows }}>
+                    <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
                     </TableRow>
                   )}

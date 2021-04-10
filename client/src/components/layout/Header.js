@@ -8,6 +8,9 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
+import { deepOrange } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -15,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     },
+  },
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[400]),
+    backgroundColor: deepOrange[400],
   },
 }));
 
@@ -42,9 +49,14 @@ export const Header = ({ mobileOpen, setMobileOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
-          Admin System
-        </Typography>
+        <Box flexGrow={1}>
+          <Typography variant="h6" noWrap>
+            Admin System
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>Admin</Typography>
+        </Box>
       </Toolbar>
       <Divider />
     </AppBar>
