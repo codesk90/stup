@@ -103,11 +103,13 @@ export const studentSlice = createSlice({
   reducers: {
     filterStudentList: (state, { payload }) => {
       state.filtered = state.studentList.filter((student) => {
-        const regex = new RegExp(`${payload}`, 'gi');
+        const regex = new RegExp(`${payload}`, `gi`);
         return (
           student.first_name.match(regex) ||
           student.last_name.match(regex) ||
-          student.school.match(regex)
+          student.school.match(regex) ||
+          student.grade.toString().match(regex) ||
+          student.level.match(regex)
         );
       });
     },
