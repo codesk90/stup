@@ -28,7 +28,7 @@
   },
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run json-server\"",
-    "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
+    "start": "react-scripts start",
     "json-server": "json-server --watch db.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
