@@ -154,7 +154,7 @@ const EnhancedTableHead = ({ classes, order, orderBy, onRequestSort }) => {
 };
 
 EnhancedTableHead.propTypes = {
-  clases: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   onRequestSort: PropTypes.func.isRequired,
