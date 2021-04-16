@@ -42,7 +42,17 @@ const Student = ({ match }) => {
         <Paper>
           <Box p={2}>
             <Grid container alignItems="center">
-              <Box flexGrow={1}>
+              <Box flexGrow={1}
+                style={{
+                  display: "flex"
+                }}
+              >
+                <Button
+                  type="button"
+                  onClick={() => {
+                    window.history.back();
+                  }}
+                >Back</Button>
                 <Typography variant="h4">Edit Student</Typography>
               </Box>
               <Button
