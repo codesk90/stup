@@ -1,4 +1,325 @@
 {
+  "teachers": [{
+    "id": 1,
+    "username": "ddecastelain0",
+    "password": "J14Pofbg",
+    "first_name": "Drusy",
+    "last_name": "de Castelain",
+    "email": "ddecastelain0@elpais.com",
+    "address": {
+      "street1": "0 Moose Junction",
+      "street2": null,
+      "city": "Boston",
+      "state": "MA",
+      "zipcode": 5
+    },
+    "phone_number1": "617-401-1815",
+    "phone_number2": null
+  }, {
+    "id": 2,
+    "username": "rwhipp1",
+    "password": "FZcvBA",
+    "first_name": "Reyna",
+    "last_name": "Whipp",
+    "email": "rwhipp1@yellowbook.com",
+    "address": {
+      "street1": "0142 American Trail",
+      "street2": null,
+      "city": "Chicago",
+      "state": "IL",
+      "zipcode": 5
+    },
+    "phone_number1": "312-145-1768",
+    "phone_number2": null
+  }, {
+    "id": 3,
+    "username": "mrobberecht2",
+    "password": "Jbn7Xi2U6D",
+    "first_name": "Misty",
+    "last_name": "Robberecht",
+    "email": "mrobberecht2@springer.com",
+    "address": {
+      "street1": "63665 Eliot Terrace",
+      "street2": null,
+      "city": "Boise",
+      "state": "ID",
+      "zipcode": 5
+    },
+    "phone_number1": "208-711-4729",
+    "phone_number2": null
+  }, {
+    "id": 4,
+    "username": "nmuck3",
+    "password": "tyAvZxsCiC",
+    "first_name": "Nedi",
+    "last_name": "Muck",
+    "email": "nmuck3@livejournal.com",
+    "address": {
+      "street1": "94 Cascade Park",
+      "street2": null,
+      "city": "Phoenix",
+      "state": "AZ",
+      "zipcode": 5
+    },
+    "phone_number1": "602-275-8946",
+    "phone_number2": null
+  }, {
+    "id": 5,
+    "username": "achilley4",
+    "password": "Q0bAZJPUah8",
+    "first_name": "Aksel",
+    "last_name": "Chilley",
+    "email": "achilley4@yolasite.com",
+    "address": {
+      "street1": "7460 Hagan Park",
+      "street2": null,
+      "city": "Oklahoma City",
+      "state": "OK",
+      "zipcode": 5
+    },
+    "phone_number1": "405-960-0420",
+    "phone_number2": "952-690-1795"
+  }, {
+    "id": 6,
+    "username": "ncollcott5",
+    "password": "JPIxXKBcoDN",
+    "first_name": "Nonna",
+    "last_name": "Collcott",
+    "email": "ncollcott5@hibu.com",
+    "address": {
+      "street1": "5 Iowa Crossing",
+      "street2": "069 Pepper Wood Alley",
+      "city": "Dallas",
+      "state": "TX",
+      "zipcode": 5
+    },
+    "phone_number1": "214-759-6980",
+    "phone_number2": null
+  }, {
+    "id": 7,
+    "username": "efilippo6",
+    "password": "7sNRvZgXRxT",
+    "first_name": "Evyn",
+    "last_name": "Filippo",
+    "email": "efilippo6@netlog.com",
+    "address": {
+      "street1": "4 Hazelcrest Pass",
+      "street2": null,
+      "city": "Monroe",
+      "state": "LA",
+      "zipcode": 5
+    },
+    "phone_number1": "318-464-9069",
+    "phone_number2": "513-141-2566"
+  }, {
+    "id": 8,
+    "username": "cblinder7",
+    "password": "KsAPCK3hOR",
+    "first_name": "Conway",
+    "last_name": "Blinder",
+    "email": "cblinder7@163.com",
+    "address": {
+      "street1": "016 West Circle",
+      "street2": null,
+      "city": "Plano",
+      "state": "TX",
+      "zipcode": 5
+    },
+    "phone_number1": "972-729-6027",
+    "phone_number2": null
+  }, {
+    "id": 9,
+    "username": "lnarraway8",
+    "password": "DijbrWqVJTiM",
+    "first_name": "Lezley",
+    "last_name": "Narraway",
+    "email": "lnarraway8@soundcloud.com",
+    "address": {
+      "street1": "9 Golden Leaf Road",
+      "street2": null,
+      "city": "Prescott",
+      "state": "AZ",
+      "zipcode": 5
+    },
+    "phone_number1": "520-300-9562",
+    "phone_number2": null
+  }, {
+    "id": 10,
+    "username": "uselbie9",
+    "password": "FJ6pPIRXC1I",
+    "first_name": "Ulysses",
+    "last_name": "Selbie",
+    "email": "uselbie9@google.ca",
+    "address": {
+      "street1": "2609 Dapin Parkway",
+      "street2": null,
+      "city": "Chicago",
+      "state": "IL",
+      "zipcode": 5
+    },
+    "phone_number1": "312-247-3746",
+    "phone_number2": null
+  }, {
+    "id": 11,
+    "username": "jgullberga",
+    "password": "LP6HUFK1RWB",
+    "first_name": "Jacquenetta",
+    "last_name": "Gullberg",
+    "email": "jgullberga@ifeng.com",
+    "address": {
+      "street1": "5434 Stoughton Avenue",
+      "street2": null,
+      "city": "Columbus",
+      "state": "OH",
+      "zipcode": 5
+    },
+    "phone_number1": "614-862-8273",
+    "phone_number2": null
+  }, {
+    "id": 12,
+    "username": "nguilfoyleb",
+    "password": "plg9y319LbRN",
+    "first_name": "Nico",
+    "last_name": "Guilfoyle",
+    "email": "nguilfoyleb@fda.gov",
+    "address": {
+      "street1": "4410 Coolidge Lane",
+      "street2": null,
+      "city": "Spokane",
+      "state": "WA",
+      "zipcode": 5
+    },
+    "phone_number1": "509-541-1846",
+    "phone_number2": null
+  }, {
+    "id": 13,
+    "username": "amarusikc",
+    "password": "8GEttu",
+    "first_name": "Antonin",
+    "last_name": "Marusik",
+    "email": "amarusikc@cargocollective.com",
+    "address": {
+      "street1": "300 Caliangt Center",
+      "street2": "595 Superior Court",
+      "city": "Chicago",
+      "state": "IL",
+      "zipcode": 5
+    },
+    "phone_number1": "312-236-3552",
+    "phone_number2": null
+  }, {
+    "id": 14,
+    "username": "thooked",
+    "password": "AoWZldGGT",
+    "first_name": "Tobit",
+    "last_name": "Hooke",
+    "email": "thooked@nyu.edu",
+    "address": {
+      "street1": "56256 Mayer Place",
+      "street2": null,
+      "city": "El Paso",
+      "state": "TX",
+      "zipcode": 5
+    },
+    "phone_number1": "915-136-0632",
+    "phone_number2": null
+  }, {
+    "id": 15,
+    "username": "kcousinse",
+    "password": "qk9KiY",
+    "first_name": "Kamilah",
+    "last_name": "Cousins",
+    "email": "kcousinse@bloglovin.com",
+    "address": {
+      "street1": "62683 Thompson Drive",
+      "street2": null,
+      "city": "Honolulu",
+      "state": "HI",
+      "zipcode": 5
+    },
+    "phone_number1": "808-710-8513",
+    "phone_number2": null
+  }, {
+    "id": 16,
+    "username": "lmcveef",
+    "password": "NcRo143qFK",
+    "first_name": "Lexis",
+    "last_name": "McVee",
+    "email": "lmcveef@prweb.com",
+    "address": {
+      "street1": "1 Orin Avenue",
+      "street2": null,
+      "city": "Canton",
+      "state": "OH",
+      "zipcode": 5
+    },
+    "phone_number1": "234-672-5399",
+    "phone_number2": null
+  }, {
+    "id": 17,
+    "username": "pransomeg",
+    "password": "flW9Mi3IY",
+    "first_name": "Penrod",
+    "last_name": "Ransome",
+    "email": "pransomeg@theatlantic.com",
+    "address": {
+      "street1": "98 Claremont Point",
+      "street2": "1 Reindahl Place",
+      "city": "Springfield",
+      "state": "IL",
+      "zipcode": 5
+    },
+    "phone_number1": "217-285-9625",
+    "phone_number2": null
+  }, {
+    "id": 18,
+    "username": "iquinnetteh",
+    "password": "tgpUhFBjEcP",
+    "first_name": "Ingamar",
+    "last_name": "Quinnette",
+    "email": "iquinnetteh@indiegogo.com",
+    "address": {
+      "street1": "06312 Oneill Street",
+      "street2": null,
+      "city": "New Haven",
+      "state": "CT",
+      "zipcode": 5
+    },
+    "phone_number1": "203-520-4437",
+    "phone_number2": null
+  }, {
+    "id": 19,
+    "username": "mtongei",
+    "password": "OaZr8JF3leY",
+    "first_name": "Manon",
+    "last_name": "Tonge",
+    "email": "mtongei@bloglines.com",
+    "address": {
+      "street1": "2 Portage Street",
+      "street2": "4 Artisan Road",
+      "city": "Staten Island",
+      "state": "NY",
+      "zipcode": 5
+    },
+    "phone_number1": "718-506-6879",
+    "phone_number2": null
+  }, {
+    "id": 20,
+    "username": "bbatyj",
+    "password": "rD7TapN1",
+    "first_name": "Bertie",
+    "last_name": "Baty",
+    "email": "bbatyj@fotki.com",
+    "address": {
+      "street1": "84 Hintze Circle",
+      "street2": "5 Blackbird Alley",
+      "city": "El Paso",
+      "state": "TX",
+      "zipcode": 5
+    },
+    "phone_number1": "915-259-3928",
+    "phone_number2": null
+  }],
   "students": [
     {
       "id": 1,

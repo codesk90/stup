@@ -17,12 +17,12 @@ import {
 } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import StudentItem from './StudentItem';
+import TeacherItem from './TeacherItem';
 import {
   clearFilter,
-  fetchStudentList,
-} from '../../../features/student/studentSlice';
-import StudentFilter from './StudentFilter';
+  fetchTeacherList,
+} from '../../../features/teacher/teacherSlice';
+import TeacherFilter from './TeacherFilter';
 import { TableSortLabel } from '@material-ui/core';
 
 const headCells = [
@@ -31,35 +31,21 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: 'Name',
-    width: '20%',
+    width: '25%',
   },
   {
-    id: 'email1',
+    id: 'username',
+    numeric: false,
+    disablePadding: false,
+    label: 'Username',
+    width: '25%',
+  },
+  {
+    id: 'email',
     numeric: false,
     disablePadding: false,
     label: 'Email',
-    width: '27.5%',
-  },
-  {
-    id: 'school',
-    numeric: false,
-    disablePadding: false,
-    label: 'School Name',
-    width: '22.5%',
-  },
-  {
-    id: 'grade',
-    numeric: true,
-    disablePadding: false,
-    label: 'Grade',
-    width: '7.5%',
-  },
-  {
-    id: 'level',
-    numeric: true,
-    disablePadding: false,
-    label: 'Level',
-    width: '7.5%',
+    width: '35%',
   },
   {
     id: 'phone_number',
@@ -160,10 +146,10 @@ EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
 };
 
-const StudentList = () => {
+const TeacherList = () => {
   const dispatch = useDispatch();
-  const { studentList, isLoading, filtered } = useSelector(
-    (state) => state.student
+  const { teacherList, isLoading, filtered } = useSelector(
+    (state) => state.teacher
   );
   const classes = useStyles();
   const pathName = useLocation().pathname;
@@ -194,11 +180,11 @@ const StudentList = () => {
   };
 
   useEffect(() => {
-    if (studentList.length === 0) {
-      dispatch(fetchStudentList());
+    if (teacherList.length === 0) {
+      dispatch(fetchTeacherList());
     }
     dispatch(clearFilter());
-  }, [dispatch, studentList]);
+  }, [dispatch, teacherList]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -210,7 +196,7 @@ const StudentList = () => {
 
   const emptyRows =
     rowsPerPage -
-    Math.min(rowsPerPage, studentList.length - page * rowsPerPage);
+    Math.min(rowsPerPage, teacherList.length - page * rowsPerPage);
 
   return (
     <Grid container spacing={2}>
@@ -220,31 +206,31 @@ const StudentList = () => {
             <Grid container alignItems="center">
               <Box>
                 <Typography variant="h4" id="tableTitle" component="div">
-                  Students
+                  Teachers
                 </Typography>
               </Box>
-              <StudentFilter />
+              <TeacherFilter />
               <Button
                 variant="outlined"
                 color="primary"
                 component={Link}
                 to={pathName + '/new'}
               >
-                New Student
+                New Teacher
               </Button>
             </Grid>
           </Box>
         </Paper>
       </Grid>
       <Grid item xs={12}>
-        {studentList.lenth !== 0 && isLoading === 'idle' && (
+        {teacherList.lenth !== 0 && isLoading === 'idle' && (
           <Paper>
             <TableContainer style={{ height: paperHeight }}>
               <Table
                 stickyHeader
                 className={classes.table}
-                aria-labelledby="Students"
-                aria-label="student table"
+                aria-labelledby="Teachers"
+                aria-label="Teacher table"
               >
                 <EnhancedTableHead
                   classes={classes}
@@ -259,19 +245,17 @@ const StudentList = () => {
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                        .map((student) => (
-                          <StudentItem student={student} key={student.id} />
+                        .map((teacher) => (
+                          <TeacherItem teacher={teacher} key={teacher.id} />
                         ))
-                    : stableSort(studentList, getComparator(order, orderBy))
+                    : stableSort(teacherList, getComparator(order, orderBy))
                         .slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                        .map((student) => {
-                          return (
-                            <StudentItem student={student} key={student.id} />
-                          );
-                        })}
+                        .map((teacher) => (
+                          <TeacherItem teacher={teacher} key={teacher.id} />
+                        ))}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -283,7 +267,7 @@ const StudentList = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25]}
               component="div"
-              count={filtered ? filtered.length : studentList.length}
+              count={filtered ? filtered.length : teacherList.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}
@@ -296,4 +280,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default TeacherList;
