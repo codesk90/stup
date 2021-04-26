@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 //   deleteStudent,
 //   updateStudent,
 // } from '../../../features/student/studentSlice';
-import { formDataList } from './formDataList';
+// import { formDataList } from './formDataList';
 import { useHistory } from 'react-router';
 
 const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
@@ -77,7 +77,7 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
   };
 
   useEffect(() => {
-    setFormList(formDataList);
+    // setFormList(formDataList);
   }, []);
 
   useEffect(() => {
