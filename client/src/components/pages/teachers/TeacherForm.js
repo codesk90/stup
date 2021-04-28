@@ -21,11 +21,11 @@ import { useDispatch } from 'react-redux';
 import { formDataList } from './formDataList';
 import { useHistory } from 'react-router';
 
-const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
+const TeacherForm = ({ teacher, edit = false, setSaveOn = null }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [openDialog, setOpenDialog] = useState(false);
-  const [studentInfo, setStudentInfo] = useState({ ...student });
+  const [teacherInfo, setTeacherInfo] = useState({ ...teacher });
   const [formList, setFormList] = useState(null);
 
   const handleOpen = () => {
@@ -39,26 +39,26 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
   const handleDelete = () => {
     setOpenDialog(false);
     // dispatch(deleteStudent(studentInfo.id));
-    history.push('/students');
+    history.push('/teachers');
   };
 
   const handleForm = (input) => (e) => {
-    setStudentInfo({
-      ...studentInfo,
+    setTeacherInfo({
+      ...teacherInfo,
       [input]: e.target.value,
     });
   };
 
   const handleAddress = (input) => (e) => {
     if (input === 'state') {
-      setStudentInfo({
-        ...studentInfo,
-        address: { ...studentInfo.address, [input]: e.target.innerText },
+      setTeacherInfo({
+        ...teacherInfo,
+        address: { ...teacherInfo.address, [input]: e.target.innerText },
       });
     }
-    setStudentInfo({
-      ...studentInfo,
-      address: { ...studentInfo.address, [input]: e.target.value },
+    setTeacherInfo({
+      ...teacherInfo,
+      address: { ...teacherInfo.address, [input]: e.target.value },
     });
   };
 
@@ -84,15 +84,15 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
     if (edit) {
       const compareObj = () => {
         if (edit) {
-          const key1 = Object.keys(studentInfo);
-          const key2 = Object.keys(student);
+          const key1 = Object.keys(teacherInfo);
+          const key2 = Object.keys(teacher);
 
           if (key1.length !== key2.length) {
             return false;
           }
 
           for (let key of key1) {
-            if (studentInfo[key] !== student[key]) {
+            if (teacherInfo[key] !== teacher[key]) {
               return false;
             }
           }
@@ -104,12 +104,12 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
 
       setSaveOn(compareObj());
     }
-  }, [studentInfo, student, edit, setSaveOn]);
+  }, [teacherInfo, teacher, edit, setSaveOn]);
 
   const phoneRegEx = '[0-9]{3}-[0-9]{3}-[0-9]{4}';
 
   return (
-    <form id="student-form" onSubmit={onSubmit}>
+    <form id="teacher-form" onSubmit={onSubmit}>
       <Box p={2}>
         <Grid container spacing={2}>
           {formList &&
@@ -127,8 +127,8 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
                     }}
                     value={
                       item.address
-                        ? studentInfo.address[item.id]
-                        : studentInfo[item.id]
+                        ? teacherInfo.address[item.id]
+                        : teacherInfo[item.id]
                     }
                     onChange={
                       !item.address
@@ -148,7 +148,7 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
               variant="outlined"
               inputProps={{ pattern: phoneRegEx, maxLength: 12 }}
               required
-              value={studentInfo.phone_number1}
+              value={teacherInfo.phone_number1}
               onChange={handleForm('phone_number1')}
               helperText="Format: 123-456-7890"
             />
@@ -160,7 +160,7 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
               type="tel"
               label={'Home Phone'}
               variant="outlined"
-              value={studentInfo.phone_number2}
+              value={teacherInfo.phone_number2}
               inputProps={{ pattern: phoneRegEx, maxLength: 12 }}
               helperText="Format: 123-456-7890"
               onChange={handleForm('phone_number2')}
@@ -179,7 +179,7 @@ const TeacherForm = ({ student, edit = false, setSaveOn = null }) => {
                 <Dialog open={openDialog} onClose={handleClose}>
                   <DialogTitle>Confirm Delete</DialogTitle>
                   <DialogContent>
-                    <DialogContentText>{`Do you want to delete ${studentInfo.first_name} ${studentInfo.last_name}?`}</DialogContentText>
+                    <DialogContentText>{`Do you want to delete ${teacherInfo.first_name} ${teacherInfo.last_name}?`}</DialogContentText>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose} color="secondary">

@@ -23,7 +23,7 @@ const TeacherFilter = () => {
     <Box flexGrow={1} mx={3}>
       <TextField
         variant="outlined"
-        placeholder="Filter Student..."
+        placeholder="Filter Teachers..."
         fullWidth
         inputRef={text}
         margin="dense"
